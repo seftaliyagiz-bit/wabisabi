@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wabi Sabi Sushi Bar Leuven — Japanse Sushi & Aziatische Fusion</title>
+  <meta name="description" content="Wabi Sabi Sushi Bar op Muntstraat 10 Leuven — verse sushi, sushi bootjes, dragon rolls en craft cocktails. Takeaway & levering. Ook in Bonheiden & Tielt-Winge." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --black:     #000000;
+      --dark:      #111111;
+      --card:      #1a1a1a;
+      --red:       #c0392b;
+      --red-dk:    #a93226;
+      --white:     #ffffff;
+      --off-white: #f5f0e8;
+      --grey:      #888888;
+      --border:    #2a2a2a;
+      --gold:      #c9922a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      color: var(--off-white);
+      background: var(--black);
+      line-height: 1.7;
+    }
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ── FADE-UP ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-block;
+      padding: 12px 26px;
+      border-radius: 4px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: all 0.22s;
+      border: 1.5px solid transparent;
+    }
+    .btn-red { background: var(--red); color: var(--white); border-color: var(--red); }
+    .btn-red:hover { background: var(--red-dk); border-color: var(--red-dk); }
+    .btn-white-outline { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.45); }
+    .btn-white-outline:hover { background: rgba(255,255,255,0.08); border-color: var(--white); }
+    .btn-dark-outline { background: transparent; color: var(--black); border-color: var(--black); }
+    .btn-dark-outline:hover { background: var(--black); color: var(--white); }
+    .btn-red-outline { background: transparent; color: var(--red); border-color: var(--red); }
+    .btn-red-outline:hover { background: var(--red); color: var(--white); }
+
+    /* ══════════════════════════════
+       NAVBAR
+    ══════════════════════════════ */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--black);
+      border-bottom: 1px solid var(--border);
+      height: 68px;
+      display: flex;
+      align-items: center;
+    }
+    /* Red accent line under navbar */
+    #navbar::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 2px;
+      background: var(--red);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    #navbar.scrolled::after { opacity: 1; }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .nav-logo { display: flex; flex-direction: column; line-height: 1.1; flex-shrink: 0; }
+    .nav-logo .logo-main { display: flex; align-items: baseline; gap: 8px; }
+    .nav-logo .logo-wabi {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--red);
+    }
+    .nav-logo .logo-jp {
+      font-size: 1rem;
+      color: var(--white);
+      opacity: 0.7;
+      letter-spacing: 0.08em;
+    }
+    .nav-logo .logo-sub {
+      font-size: 0.63rem;
+      color: var(--grey);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--red); }
+    .nav-right { display: flex; align-items: center; gap: 18px; flex-shrink: 0; }
+    .lang-toggle {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      user-select: none;
+      color: var(--red);
+    }
+    .lang-toggle span { transition: opacity 0.2s; }
+    .lang-toggle span.active { opacity: 1; }
+    .lang-toggle span:not(.active):not(.sep) { opacity: 0.3; }
+    .lang-toggle .sep { margin: 0 4px; color: var(--border); opacity: 1; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--white);
+      border-radius: 1px;
+      transition: all 0.3s;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: var(--dark);
+      border-bottom: 2px solid var(--red);
+      padding: 16px 28px 24px;
+      z-index: 999;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: 0.05em;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--red); }
+
+    /* ══════════════════════════════
+       HERO
+    ══════════════════════════════ */
+    #hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 28px 80px;
+      background-image: url('images/hero.png');
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+    }
+    .hero-watermark {
+      position: absolute;
+      right: 3%;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: clamp(9rem, 20vw, 18rem);
+      color: rgba(255,255,255,0.03);
+      font-family: serif;
+      pointer-events: none;
+      user-select: none;
+      line-height: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      text-align: center;
+      color: var(--white);
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 3px;
+      padding: 7px 18px;
+      font-size: 0.76rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hero-badge i { color: var(--gold); font-size: 0.7rem; }
+    .hero-h1-wrap { margin-bottom: 18px; }
+    .hero-h1-wabi {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: clamp(4rem, 10vw, 8rem);
+      color: var(--white);
+      line-height: 0.9;
+      display: block;
+      text-shadow: 0 2px 40px rgba(0,0,0,0.6);
+    }
+    .hero-h1-sub {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      letter-spacing: 0.15em;
+      color: var(--red);
+      display: block;
+      line-height: 1.1;
+    }
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--off-white);
+      font-style: italic;
+      line-height: 1.6;
+      margin-bottom: 14px;
+      opacity: 0.85;
+    }
+    .hero-quote {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      font-style: italic;
+      margin-bottom: 28px;
+    }
+    .hero-icons {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+    .hero-icon-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.6);
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+    .icon-emoji { font-size: 1rem; }
+    .hero-ctas {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .hero-status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.04em;
+    }
+    .pulse-dot {
+      width: 7px; height: 7px;
+      background: var(--red);
+      border-radius: 50%;
+      flex-shrink: 0;
+      animation: pulse 2.2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.35; transform: scale(1.6); }
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 28px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      color: rgba(255,255,255,0.25);
+      font-size: 1.2rem;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ══════════════════════════════
+       SECTIONS SHARED
+    ══════════════════════════════ */
+    section { padding: 88px 28px; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 10px;
+    }
+    .section-label.grey { color: var(--grey); }
+    .section-title {
+      font-size: clamp(1.9rem, 3.5vw, 2.7rem);
+      font-style: italic;
+      line-height: 1.15;
+      margin-bottom: 48px;
+    }
+    .section-title.light { color: var(--white); }
+    .section-title.dark  { color: var(--black); }
+
+    /* ══════════════════════════════
+       CONCEPT STRIP
+    ══════════════════════════════ */
+    #concept { background: var(--dark); padding: 64px 28px; }
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .concept-card {
+      background: var(--dark);
+      padding: 36px 26px;
+      border-left: 2px solid transparent;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .concept-card:first-child { border-left: none; }
+    .concept-card:hover { border-left-color: var(--red); background: #161616; }
+    .concept-emoji { font-size: 2rem; margin-bottom: 14px; display: block; }
+    .concept-title {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .concept-desc { font-size: 0.83rem; color: var(--grey); line-height: 1.65; }
+
+    /* ══════════════════════════════
+       MENU HIGHLIGHTS
+    ══════════════════════════════ */
+    #menu { background: var(--white); }
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: #e0e0e0;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+    .spec-card {
+      background: var(--white);
+      padding: 36px 28px;
+      position: relative;
+      border-top: 3px solid transparent;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .spec-card:hover { border-top-color: var(--red); box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .spec-badge {
+      position: absolute;
+      top: 20px; right: 20px;
+      background: var(--red);
+      color: var(--white);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 2px;
+    }
+    .spec-icon { font-size: 2rem; margin-bottom: 14px; display: block; }
+    .spec-card h3 {
+      font-size: 1.2rem;
+      font-style: italic;
+      margin-bottom: 12px;
+      color: var(--black);
+    }
+    .spec-card p { font-size: 0.88rem; color: #555; line-height: 1.75; }
+    .menu-cta { text-align: center; }
+    .menu-cta a {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--red);
+      border-bottom: 1.5px solid var(--red);
+      padding-bottom: 2px;
+      transition: opacity 0.2s;
+    }
+    .menu-cta a:hover { opacity: 0.7; }
+
+    /* ══════════════════════════════
+       ABOUT
+    ══════════════════════════════ */
+    #about { background: var(--black); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .about-img img {
+      width: 100%;
+      border-radius: 6px;
+      border: 2px solid var(--red);
+      object-fit: cover;
+      max-height: 500px;
+    }
+    .about-sub {
+      font-style: italic;
+      color: var(--grey);
+      margin-bottom: 18px;
+      font-size: 0.98rem;
+    }
+    .about-body {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.85;
+      margin-bottom: 30px;
+    }
+    .about-stats { display: flex; gap: 10px; flex-wrap: wrap; }
+    .about-stat {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--white);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 7px 14px;
+    }
+    .about-stat i { color: var(--red); font-size: 0.75rem; }
+
+    /* ══════════════════════════════
+       GALLERY
+    ══════════════════════════════ */
+    #gallery { background: var(--dark); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+    }
+    .gallery-item {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      border-radius: 0;
+      border: 1.5px solid transparent;
+      transition: border-color 0.3s;
+    }
+    .gallery-item:first-child { border-radius: 6px 0 0 6px; }
+    .gallery-item:last-child  { border-radius: 0 6px 6px 0; }
+    .gallery-item:hover { border-color: var(--red); z-index: 1; position: relative; }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      filter: brightness(0.92);
+    }
+    .gallery-item:hover img { transform: scale(1.06); filter: brightness(1); }
+
+    /* ══════════════════════════════
+       REVIEWS
+    ══════════════════════════════ */
+    #reviews { background: var(--white); }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: #e8e8e8;
+      border: 1px solid #e8e8e8;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 36px;
+    }
+    .review-card {
+      background: var(--white);
+      padding: 30px 24px;
+      border-top: 2px solid transparent;
+      transition: border-color 0.25s;
+    }
+    .review-card:hover { border-top-color: var(--red); }
+    .review-stars { color: var(--gold); font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 14px; }
+    .review-text { font-size: 0.88rem; color: #444; font-style: italic; line-height: 1.75; margin-bottom: 14px; }
+    .review-source { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); }
+    .reviews-cta {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .reviews-cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: #555;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      padding: 10px 18px;
+      transition: all 0.2s;
+    }
+    .reviews-cta a:hover { border-color: var(--red); color: var(--red); }
+
+    /* ══════════════════════════════
+       LOCATIONS
+    ══════════════════════════════ */
+    #locations { background: var(--black); }
+    .locations-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .loc-card {
+      background: var(--dark);
+      padding: 40px 32px;
+      border-top: 2px solid transparent;
+      transition: border-color 0.25s, background 0.25s;
+      position: relative;
+    }
+    .loc-card.active { border-top-color: var(--red); }
+    .loc-card:hover { background: #161616; border-top-color: var(--red); }
+    .loc-dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      background: var(--red);
+      border-radius: 50%;
+      margin-bottom: 16px;
+    }
+    .loc-card.active .loc-dot { animation: pulse 2s infinite; }
+    .loc-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .loc-address { font-size: 0.85rem; color: var(--grey); margin-bottom: 4px; }
+    .loc-phone { font-size: 0.85rem; color: var(--grey); margin-bottom: 20px; }
+    .loc-phone a { color: var(--grey); transition: color 0.2s; }
+    .loc-phone a:hover { color: var(--red); }
+    .loc-badge {
+      position: absolute;
+      top: 16px; right: 20px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--red);
+      border: 1px solid var(--red);
+      border-radius: 2px;
+      padding: 3px 8px;
+    }
+
+    /* ══════════════════════════════
+       CONTACT
+    ══════════════════════════════ */
+    #contact { background: var(--dark); }
+    #contact .section-label { color: var(--red); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .contact-info { color: rgba(255,255,255,0.7); }
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: 0.93rem;
+    }
+    .contact-detail i { color: var(--red); width: 18px; flex-shrink: 0; margin-top: 3px; }
+    .contact-detail a { color: rgba(255,255,255,0.7); transition: color 0.2s; }
+    .contact-detail a:hover { color: var(--red); }
+    .hours-table { width: 100%; margin-top: 6px; }
+    .hours-table tr td { padding: 4px 0; font-size: 0.86rem; }
+    .hours-table tr td:first-child { color: rgba(255,255,255,0.35); width: 64px; font-weight: 500; }
+    .contact-features {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .contact-feature {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.4);
+    }
+    .contact-feature i { color: var(--red); font-size: 0.75rem; }
+    .map-wrap { margin-top: 22px; border-radius: 6px; overflow: hidden; }
+
+    /* Form */
+    .contact-form h3 {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.5rem;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+    .form-group label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+    .form-group input,
+    .form-group textarea {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 3px;
+      padding: 11px 14px;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,0.2); }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--red); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-success {
+      display: none;
+      background: rgba(192,57,43,0.1);
+      border: 1px solid rgba(192,57,43,0.3);
+      border-radius: 4px;
+      padding: 16px 20px;
+      color: var(--red);
+      font-size: 0.9rem;
+      margin-top: 12px;
+    }
+
+    /* ══════════════════════════════
+       FOOTER
+    ══════════════════════════════ */
+    #footer {
+      background: var(--black);
+      border-top: 1px solid var(--border);
+      padding: 44px 28px;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: center;
+      gap: 24px;
+    }
+    .footer-logo .fl-name {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .footer-logo .fl-jp {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.25);
+      margin-left: 6px;
+      letter-spacing: 0.08em;
+    }
+    .footer-logo .fl-bar {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.2em;
+      color: var(--red);
+      display: block;
+      margin-top: 1px;
+    }
+    .footer-logo p { font-size: 0.76rem; color: rgba(255,255,255,0.25); margin-top: 6px; }
+    .footer-center {
+      text-align: center;
+      font-size: 0.74rem;
+      color: rgba(255,255,255,0.18);
+      line-height: 2;
+    }
+    .footer-right { text-align: right; }
+    .footer-right a {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--red);
+      margin-bottom: 8px;
+      transition: opacity 0.2s;
+    }
+    .footer-right a:hover { opacity: 0.7; }
+
+    /* ══════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════ */
+    @media (max-width: 1024px) {
+      .concept-grid   { grid-template-columns: repeat(2, 1fr); }
+      .locations-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-right .btn { display: none; }
+      .hamburger { display: flex; }
+      .concept-grid   { grid-template-columns: repeat(2, 1fr); gap: 1px; }
+      .spec-grid      { grid-template-columns: 1fr; gap: 2px; }
+      .about-grid     { grid-template-columns: 1fr; gap: 40px; }
+      .gallery-grid   { grid-template-columns: 1fr 1fr; gap: 2px; }
+      .gallery-item:first-child { border-radius: 6px 0 0 0; }
+      .gallery-item:last-child  { border-radius: 0 0 6px 6px; }
+      .reviews-grid   { grid-template-columns: 1fr; gap: 2px; }
+      .locations-grid { grid-template-columns: 1fr; }
+      .contact-grid   { grid-template-columns: 1fr; gap: 48px; }
+      .footer-inner   { grid-template-columns: 1fr; text-align: center; gap: 20px; }
+      .footer-right   { text-align: center; }
+      .footer-right a { justify-content: center; }
+    }
+    @media (max-width: 480px) {
+      section { padding: 56px 16px; }
+      #concept { padding: 48px 16px; }
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .hero-ctas .btn { width: 100%; max-width: 300px; text-align: center; }
+      .concept-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; gap: 2px; }
+      .gallery-item:first-child,
+      .gallery-item:last-child { border-radius: 0; }
+      .reviews-cta { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════
+     NAVBAR
+══════════════════════════════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="logo-main">
+        <span class="logo-wabi">Wabi Sabi</span>
+        <span class="logo-jp">侘寂</span>
+      </div>
+      <span class="logo-sub">Sushi Bar · Muntstraat · Leuven</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#menu"      data-nl="Menu"      data-en="Menu">Menu</a></li>
+      <li><a href="#about"     data-nl="Over ons"  data-en="About">Over ons</a></li>
+      <li><a href="#locations" data-nl="Locaties"  data-en="Locations">Locaties</a></li>
+      <li><a href="#contact"   data-nl="Contact"   data-en="Contact">Contact</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <a href="https://leuven.wabisabisushi.be/" target="_blank" rel="noopener"
+         class="btn btn-red" data-nl="Bestel online" data-en="Order online">Bestel online</a>
+      <div class="lang-toggle" id="langToggle">
+        <span id="langNL" class="active">NL</span>
+        <span class="sep">|</span>
+        <span id="langEN">EN</span>
+      </div>
+    </div>
+
+    <div class="hamburger" id="hamburger" aria-label="Menu" role="button" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#menu"      data-nl="Menu"     data-en="Menu">Menu</a>
+  <a href="#about"     data-nl="Over ons" data-en="About">Over ons</a>
+  <a href="#locations" data-nl="Locaties" data-en="Locations">Locaties</a>
+  <a href="#contact"   data-nl="Contact"  data-en="Contact">Contact</a>
+  <a href="https://leuven.wabisabisushi.be/" target="_blank" rel="noopener"
+     class="btn btn-red" style="text-align:center;"
+     data-nl="Bestel online" data-en="Order online">Bestel online</a>
+</div>
+
+<!-- ══════════════════════════════
+     HERO
+══════════════════════════════ -->
+<section id="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-watermark">侘寂</div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <i class="fa-solid fa-star"></i>
+      4.2/5 Google &nbsp;·&nbsp; Restaurant Guru 4.1 &nbsp;·&nbsp; Muntstraat 10 · Leuven
+    </div>
+
+    <div class="hero-h1-wrap">
+      <span class="hero-h1-wabi">Wabi Sabi</span>
+      <span class="hero-h1-sub">Sushi Bar</span>
+    </div>
+
+    <p class="hero-sub">
+      <span data-nl="Japanse sushi en Aziatische fusion<br>in het hart van de Muntstraat"
+            data-en="Japanese sushi and Asian fusion<br>in the heart of Muntstraat">
+        Japanse sushi en Aziatische fusion<br>in het hart van de Muntstraat
+      </span>
+    </p>
+
+    <p class="hero-quote">
+      <span data-nl="&ldquo;Een immersieve ervaring — ruimte, smaak en sfeer&rdquo;"
+            data-en="&ldquo;An immersive experience — space, taste and atmosphere&rdquo;">
+        &ldquo;Een immersieve ervaring — ruimte, smaak en sfeer&rdquo;
+      </span>
+    </p>
+
+    <div class="hero-icons">
+      <span class="hero-icon-item"><span class="icon-emoji">🍣</span> Sushi</span>
+      <span class="hero-icon-item"><span class="icon-emoji">⛵</span> <span data-nl="Bootje" data-en="Boat">Bootje</span></span>
+      <span class="hero-icon-item"><span class="icon-emoji">🍹</span> Cocktails</span>
+      <span class="hero-icon-item"><span class="icon-emoji">🌿</span> <span data-nl="Terras" data-en="Terrace">Terras</span></span>
+    </div>
+
+    <div class="hero-ctas">
+      <a href="#menu" class="btn btn-red"
+         data-nl="Bekijk ons menu" data-en="View our menu">Bekijk ons menu</a>
+      <a href="https://leuven.wabisabisushi.be/" target="_blank" rel="noopener"
+         class="btn btn-white-outline"
+         data-nl="Bestel online" data-en="Order online">Bestel online</a>
+    </div>
+
+    <div class="hero-status">
+      <span class="pulse-dot"></span>
+      <span data-nl="Ma: 17:30 · Di–Zo: 11:30 &amp; 17:30"
+            data-en="Mon: 17:30 · Tue–Sun: 11:30 &amp; 17:30">
+        Ma: 17:30 · Di–Zo: 11:30 &amp; 17:30
+      </span>
+    </div>
+  </div>
+
+  <div class="hero-scroll"><i class="fa-solid fa-chevron-down"></i></div>
+</section>
+
+<!-- ══════════════════════════════
+     CONCEPT STRIP
+══════════════════════════════ -->
+<section id="concept">
+  <div class="section-inner">
+    <div class="concept-grid">
+      <div class="concept-card fade-up">
+        <span class="concept-emoji">🍣</span>
+        <div class="concept-title" data-nl="Verse sushi" data-en="Fresh sushi">Verse sushi</div>
+        <p class="concept-desc"
+           data-nl="Nigiri, sashimi, dragon rolls — dagvers bereid"
+           data-en="Nigiri, sashimi, dragon rolls — freshly prepared daily">
+          Nigiri, sashimi, dragon rolls — dagvers bereid
+        </p>
+      </div>
+      <div class="concept-card fade-up">
+        <span class="concept-emoji">⛵</span>
+        <div class="concept-title" data-nl="Sushi bootjes" data-en="Sushi boats">Sushi bootjes</div>
+        <p class="concept-desc"
+           data-nl="Voor 2 tot groepen — ook de Titanic boat!"
+           data-en="For 2 to groups — including the Titanic boat!">
+          Voor 2 tot groepen — ook de Titanic boat!
+        </p>
+      </div>
+      <div class="concept-card fade-up">
+        <span class="concept-emoji">🍹</span>
+        <div class="concept-title" data-nl="Craft cocktails" data-en="Craft cocktails">Craft cocktails</div>
+        <p class="concept-desc"
+           data-nl="Shiso sour, old fashioned en meer — een revelatie!"
+           data-en="Shiso sour, old fashioned and more — a revelation!">
+          Shiso sour, old fashioned en meer — een revelatie!
+        </p>
+      </div>
+      <div class="concept-card fade-up">
+        <span class="concept-emoji">🌿</span>
+        <div class="concept-title" data-nl="Terras &amp; afhaal" data-en="Terrace &amp; takeaway">Terras &amp; afhaal</div>
+        <p class="concept-desc"
+           data-nl="Zomers terras op de Muntstraat. Ook afhalen &amp; levering."
+           data-en="Summer terrace on Muntstraat. Also takeaway &amp; delivery.">
+          Zomers terras op de Muntstraat. Ook afhalen &amp; levering.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     MENU HIGHLIGHTS
+══════════════════════════════ -->
+<section id="menu">
+  <div class="section-inner">
+    <p class="section-label grey fade-up" data-nl="Japanse keuken" data-en="Japanese cuisine">Japanse keuken</p>
+    <h2 class="section-title dark fade-up" data-nl="Onze Specialiteiten" data-en="Our Specialities">Onze Specialiteiten</h2>
+
+    <div class="spec-grid">
+      <div class="spec-card fade-up">
+        <span class="spec-icon">🍣</span>
+        <h3 data-nl="Sushi &amp; Sashimi" data-en="Sushi &amp; Sashimi">Sushi &amp; Sashimi</h3>
+        <p data-nl="Verse nigiri, sashimi en onze beroemde dragon rolls. Alle vis dagvers — Japanse kwaliteit op zijn best."
+           data-en="Fresh nigiri, sashimi and our famous dragon rolls. All fish fresh daily — Japanese quality at its best.">
+          Verse nigiri, sashimi en onze beroemde dragon rolls. Alle vis dagvers — Japanse kwaliteit op zijn best.
+        </p>
+      </div>
+      <div class="spec-card fade-up">
+        <span class="spec-badge">⭐ BESTSELLER</span>
+        <span class="spec-icon">⛵</span>
+        <h3 data-nl="Sushi Bootjes" data-en="Sushi Boats">Sushi Bootjes</h3>
+        <p data-nl="Van romantisch bootje voor 2 tot de legendarische Titanic boat voor 4-5 personen. &lsquo;Meer dan genoeg voor 5 personen!&rsquo;"
+           data-en="From a romantic boat for 2 to the legendary Titanic boat for 4-5 people. &lsquo;More than enough for 5 people!&rsquo;">
+          Van romantisch bootje voor 2 tot de legendarische Titanic boat voor 4-5 personen. &lsquo;Meer dan genoeg voor 5 personen!&rsquo;
+        </p>
+      </div>
+      <div class="spec-card fade-up">
+        <span class="spec-icon">🍜</span>
+        <h3 data-nl="Aziatische Fusion" data-en="Asian Fusion">Aziatische Fusion</h3>
+        <p data-nl="Pad Thai, oriëntaalse gerechten en sushi gecombineerd — uniek concept in Leuven. Ook South East Asian specialiteiten."
+           data-en="Pad Thai, oriental dishes and sushi combined — unique concept in Leuven. Also South East Asian specialties.">
+          Pad Thai, oriëntaalse gerechten en sushi gecombineerd — uniek concept in Leuven. Ook South East Asian specialiteiten.
+        </p>
+      </div>
+    </div>
+
+    <div class="menu-cta fade-up">
+      <a href="https://leuven.wabisabisushi.be/" target="_blank" rel="noopener">
+        <span data-nl="Volledig menu &amp; online bestellen →" data-en="Full menu &amp; order online →">Volledig menu &amp; online bestellen →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     ABOUT
+══════════════════════════════ -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-img fade-up">
+        <img src="images/food-1.png" alt="Wabi Sabi Sushi Bar Leuven" />
+      </div>
+      <div class="about-text">
+        <p class="section-label fade-up" data-nl="Ons verhaal" data-en="Our story">Ons verhaal</p>
+        <h2 class="section-title light fade-up" style="margin-bottom:14px;"
+            data-nl="Meer dan een sushirestaurant."
+            data-en="More than a sushi restaurant.">
+          Meer dan een sushirestaurant.
+        </h2>
+        <p class="about-sub fade-up"
+           data-nl="Een immersieve ervaring — ruimte, smaak en sfeer."
+           data-en="An immersive experience — space, taste and atmosphere.">
+          Een immersieve ervaring — ruimte, smaak en sfeer.
+        </p>
+        <p class="about-body fade-up"
+           data-nl="Wabi Sabi Sushi Bar combineert de smaken van Zuid-Oost Azië met de beste Japanse keuken. Het interieur is doordacht ontworpen — kamerschermen, ambachtelijke papieren lantaarns, Japanse houten menu's en verse bloemen. In de zomer kan je genieten op ons prachtige terras op de Muntstraat. Ook verkrijgbaar als takeaway en levering."
+           data-en="Wabi Sabi Sushi Bar combines the flavors of South East Asia with the best of Japanese cuisine. The interior is thoughtfully designed — screened rooms, artisanal paper lanterns, Japanese wood menus and fresh flowers. In summer you can enjoy our beautiful terrace on Muntstraat. Also available as takeaway and delivery.">
+          Wabi Sabi Sushi Bar combineert de smaken van Zuid-Oost Azië met de beste Japanse keuken. Het interieur is doordacht ontworpen — kamerschermen, ambachtelijke papieren lantaarns, Japanse houten menu's en verse bloemen. In de zomer kan je genieten op ons prachtige terras op de Muntstraat. Ook verkrijgbaar als takeaway en levering.
+        </p>
+        <div class="about-stats fade-up">
+          <span class="about-stat"><i class="fa-solid fa-star"></i>
+            <span data-nl="4.2★ Google" data-en="4.2★ Google">4.2★ Google</span>
+          </span>
+          <span class="about-stat"><i class="fa-solid fa-location-dot"></i>
+            <span data-nl="3 Vestigingen" data-en="3 Locations">3 Vestigingen</span>
+          </span>
+          <span class="about-stat"><i class="fa-solid fa-map-pin"></i>
+            Muntstraat 10
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     GALLERY
+══════════════════════════════ -->
+<section id="gallery">
+  <div class="section-inner">
+    <p class="section-label fade-up" data-nl="Foto's" data-en="Photos">Foto's</p>
+    <h2 class="section-title light fade-up" data-nl="Onze Sushi" data-en="Our Sushi">Onze Sushi</h2>
+
+    <div class="gallery-grid">
+      <div class="gallery-item fade-up">
+        <img src="images/food-1.png" alt="Wabi Sabi sushi" loading="lazy" />
+      </div>
+      <div class="gallery-item fade-up">
+        <img src="images/food-2.png" alt="Wabi Sabi specialiteiten" loading="lazy" />
+      </div>
+      <div class="gallery-item fade-up">
+        <img src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=600" alt="Sushi rolls" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     REVIEWS
+══════════════════════════════ -->
+<section id="reviews">
+  <div class="section-inner">
+    <p class="section-label grey fade-up" data-nl="Gastrecensies" data-en="Guest reviews">Gastrecensies</p>
+    <h2 class="section-title dark fade-up" data-nl="Wat onze gasten zeggen" data-en="What our guests say">Wat onze gasten zeggen</h2>
+
+    <div class="reviews-grid">
+      <div class="review-card fade-up">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">&ldquo;Wabi Sabi delivers an immersive experience. With hand crafted playlists, warm harmonious interior, artisanal paper lanterns and craft cocktails — the Shiso sour was a revelation!&rdquo;</p>
+        <span class="review-source">TripAdvisor</span>
+      </div>
+      <div class="review-card fade-up">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">&ldquo;One of the best sushi shops in Leuven, in a beautiful building on the busy Muntstraat. In summer you can enjoy your sushi boat on their beautiful terrace.&rdquo;</p>
+        <span class="review-source">TripAdvisor</span>
+      </div>
+      <div class="review-card fade-up">
+        <div class="review-stars">★★★★</div>
+        <p class="review-text">&ldquo;Very fine, fresh sushi. Four of us took the Titanic boat — more than enough for 5 people! Service is very friendly and the atmosphere is wonderful.&rdquo;</p>
+        <span class="review-source">TripAdvisor</span>
+      </div>
+    </div>
+
+    <div class="reviews-cta fade-up">
+      <a href="https://www.tripadvisor.com/Restaurant_Review-Wabi_Sabi_Leuven" target="_blank" rel="noopener">
+        <i class="fa-solid fa-globe"></i>
+        <span data-nl="Reviews op TripAdvisor" data-en="Reviews on TripAdvisor">Reviews op TripAdvisor</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+      <a href="https://maps.google.com/?q=Wabi+Sabi+Sushi+Bar+Muntstraat+10+Leuven" target="_blank" rel="noopener">
+        <i class="fa-brands fa-google"></i>
+        <span data-nl="Google Maps" data-en="Google Maps">Google Maps</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     LOCATIONS
+══════════════════════════════ -->
+<section id="locations">
+  <div class="section-inner">
+    <p class="section-label fade-up" data-nl="Drie vestigingen" data-en="Three locations">Drie vestigingen</p>
+    <h2 class="section-title light fade-up" data-nl="Onze Vestigingen" data-en="Our Locations">Onze Vestigingen</h2>
+
+    <div class="locations-grid">
+      <div class="loc-card active fade-up">
+        <span class="loc-badge" data-nl="U bent hier" data-en="You are here">U bent hier</span>
+        <div class="loc-dot"></div>
+        <div class="loc-name">Leuven</div>
+        <p class="loc-address">Muntstraat 10, 3000 Leuven</p>
+        <p class="loc-phone"><a href="tel:+3216747754">+32 16 74 77 54</a></p>
+        <a href="https://leuven.wabisabisushi.be/" target="_blank" rel="noopener"
+           class="btn btn-red" style="font-size:0.8rem;padding:9px 18px;"
+           data-nl="Bestel Leuven →" data-en="Order Leuven →">Bestel Leuven →</a>
+      </div>
+      <div class="loc-card fade-up">
+        <div class="loc-dot" style="background:var(--border);animation:none;"></div>
+        <div class="loc-name">Bonheiden</div>
+        <p class="loc-address">Bonheiden</p>
+        <p class="loc-phone" style="margin-bottom:20px;"></p>
+        <a href="https://bonheiden.wabisabisushi.be/" target="_blank" rel="noopener"
+           class="btn btn-red-outline" style="font-size:0.8rem;padding:9px 18px;"
+           data-nl="Bestel Bonheiden →" data-en="Order Bonheiden →">Bestel Bonheiden →</a>
+      </div>
+      <div class="loc-card fade-up">
+        <div class="loc-dot" style="background:var(--border);animation:none;"></div>
+        <div class="loc-name">Tielt-Winge</div>
+        <p class="loc-address">Tielt-Winge</p>
+        <p class="loc-phone" style="margin-bottom:20px;"></p>
+        <a href="https://tielt-winge.wabisabisushi.be/" target="_blank" rel="noopener"
+           class="btn btn-red-outline" style="font-size:0.8rem;padding:9px 18px;"
+           data-nl="Bestel Tielt-Winge →" data-en="Order Tielt-Winge →">Bestel Tielt-Winge →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     CONTACT
+══════════════════════════════ -->
+<section id="contact">
+  <div class="section-inner">
+    <p class="section-label fade-up" data-nl="Leuven vestiging" data-en="Leuven location">Leuven vestiging</p>
+    <h2 class="section-title light fade-up" data-nl="Contact &amp; Openingsuren" data-en="Contact &amp; Opening Hours">Contact &amp; Openingsuren</h2>
+
+    <div class="contact-grid">
+      <!-- Info + Map -->
+      <div class="contact-info">
+        <div class="contact-detail fade-up">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>Muntstraat 10, 3000 Leuven</span>
+        </div>
+        <div class="contact-detail fade-up">
+          <i class="fa-solid fa-phone"></i>
+          <a href="tel:+3216747754">+32 16 74 77 54</a>
+        </div>
+        <div class="contact-detail fade-up">
+          <i class="fa-solid fa-globe"></i>
+          <a href="https://wabisabisushi.be" target="_blank" rel="noopener">wabisabisushi.be</a>
+        </div>
+
+        <div class="contact-detail fade-up" style="align-items:flex-start; margin-top:8px;">
+          <i class="fa-solid fa-clock"></i>
+          <table class="hours-table">
+            <tbody>
+              <tr>
+                <td data-nl="Ma" data-en="Mon">Ma</td>
+                <td>17:30–22:30</td>
+              </tr>
+              <tr>
+                <td data-nl="Di" data-en="Tue">Di</td>
+                <td>11:30–14:30 &amp; 17:30–22:30</td>
+              </tr>
+              <tr>
+                <td data-nl="Wo" data-en="Wed">Wo</td>
+                <td>11:30–14:30 &amp; 17:30–22:30</td>
+              </tr>
+              <tr>
+                <td data-nl="Do" data-en="Thu">Do</td>
+                <td>11:30–14:30 &amp; 17:30–22:30</td>
+              </tr>
+              <tr>
+                <td data-nl="Vr" data-en="Fri">Vr</td>
+                <td>11:30–14:30 &amp; 17:30–22:30</td>
+              </tr>
+              <tr>
+                <td data-nl="Za" data-en="Sat">Za</td>
+                <td>11:30–14:30 &amp; 17:30–22:30</td>
+              </tr>
+              <tr>
+                <td data-nl="Zo" data-en="Sun">Zo</td>
+                <td>11:30–14:30 &amp; 17:30–22:30</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="contact-features fade-up">
+          <span class="contact-feature"><i class="fa-solid fa-umbrella-beach"></i>
+            <span data-nl="Terras" data-en="Terrace">Terras</span>
+          </span>
+          <span class="contact-feature"><i class="fa-solid fa-box"></i>
+            <span data-nl="Afhaal" data-en="Takeaway">Afhaal</span>
+          </span>
+          <span class="contact-feature"><i class="fa-solid fa-motorcycle"></i>
+            <span data-nl="Levering" data-en="Delivery">Levering</span>
+          </span>
+          <span class="contact-feature"><i class="fa-solid fa-baby"></i>
+            Booster seats
+          </span>
+        </div>
+
+        <div class="map-wrap fade-up">
+          <iframe
+            src="https://www.google.com/maps?q=Muntstraat+10,+3000+Leuven&output=embed"
+            width="100%" height="280"
+            style="border:0;border-radius:6px;display:block;"
+            allowfullscreen loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form fade-up">
+        <h3 data-nl="Stuur ons een bericht" data-en="Send us a message">Stuur ons een bericht</h3>
+
+        <form id="contactForm" novalidate>
+          <div class="form-group">
+            <label data-nl="Naam" data-en="Name">Naam</label>
+            <input type="text" id="fname"
+                   data-placeholder-nl="Uw naam"
+                   data-placeholder-en="Your name"
+                   placeholder="Uw naam" required />
+          </div>
+          <div class="form-group">
+            <label data-nl="Email" data-en="Email">Email</label>
+            <input type="email" id="femail"
+                   data-placeholder-nl="uw@email.com"
+                   data-placeholder-en="your@email.com"
+                   placeholder="uw@email.com" required />
+          </div>
+          <div class="form-group">
+            <label data-nl="Bericht" data-en="Message">Bericht</label>
+            <textarea id="fmessage"
+                      data-placeholder-nl="Uw bericht..."
+                      data-placeholder-en="Your message..."
+                      placeholder="Uw bericht..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-red" style="width:100%;padding:14px;"
+                  data-nl="Verstuur →" data-en="Send →">Verstuur →</button>
+        </form>
+
+        <div class="form-success" id="formSuccess">
+          <span data-nl="Bedankt! We antwoorden zo snel mogelijk."
+                data-en="Thanks! We'll get back to you soon.">
+            Bedankt! We antwoorden zo snel mogelijk.
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     FOOTER
+══════════════════════════════ -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <div>
+        <span class="fl-name">Wabi Sabi</span>
+        <span class="fl-jp">侘寂</span>
+      </div>
+      <span class="fl-bar">Sushi Bar</span>
+      <p>
+        <span data-nl="Muntstraat 10 · 3000 Leuven"
+              data-en="Muntstraat 10 · 3000 Leuven">
+          Muntstraat 10 · 3000 Leuven
+        </span>
+      </p>
+    </div>
+
+    <div class="footer-center">
+      <p>© 2026 · Wabi Sabi Sushi Bar</p>
+      <p>Leuven · Bonheiden · Tielt-Winge</p>
+      <p style="margin-top:4px;font-size:0.68rem;opacity:0.5;">4.2★ Google · 4.1★ Restaurant Guru</p>
+    </div>
+
+    <div class="footer-right">
+      <a href="https://facebook.com/wabisabileuven" target="_blank" rel="noopener">
+        <i class="fa-brands fa-facebook-f"></i> facebook.com/wabisabileuven
+      </a>
+      <a href="https://wabisabisushi.be" target="_blank" rel="noopener">
+        <i class="fa-solid fa-globe"></i> wabisabisushi.be
+      </a>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════
+     JAVASCRIPT
+══════════════════════════════ -->
+<script>
+  /* ── Language system ── */
+  let currentLang = 'nl';
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+
+    document.querySelectorAll('[data-nl]').forEach(el => {
+      const val = el.getAttribute('data-' + lang);
+      if (val === null) return;
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = val;
+      } else {
+        el.innerHTML = val;
+      }
+    });
+
+    document.querySelectorAll('[data-placeholder-' + lang + ']').forEach(el => {
+      el.placeholder = el.getAttribute('data-placeholder-' + lang);
+    });
+
+    document.getElementById('langNL').classList.toggle('active', lang === 'nl');
+    document.getElementById('langEN').classList.toggle('active', lang === 'en');
+  }
+
+  document.getElementById('langToggle').addEventListener('click', e => {
+    const t = e.target.closest('#langNL, #langEN');
+    if (!t) return;
+    setLang(t.id === 'langNL' ? 'nl' : 'en');
+  });
+
+  /* ── Navbar scroll ── */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 24);
+  }, { passive: true });
+
+  /* ── Hamburger ── */
+  const hamburger  = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  });
+
+  /* ── Smooth scroll ── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  /* ── IntersectionObserver ── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  /* ── Contact form ── */
+  const form        = document.getElementById('contactForm');
+  const formSuccess = document.getElementById('formSuccess');
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!document.getElementById('fname').value.trim())    return;
+    if (!document.getElementById('femail').value.trim())   return;
+    if (!document.getElementById('fmessage').value.trim()) return;
+    form.style.display = 'none';
+    formSuccess.style.display = 'block';
+  });
+
+  /* ── Init ── */
+  setLang('nl');
+</script>
+
+</body>
+</html>
